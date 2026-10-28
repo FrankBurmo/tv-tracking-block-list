@@ -1,0 +1,64 @@
+! Title: Smart TV Tracking & Telemetry Blocklist
+! Description: Blocks ACR (Automatic Content Recognition), ad, and telemetry domains used by popular smart TV platforms (LG webOS, Samsung Tizen, Google TV/Android TV, Roku OS, Vizio).
+! Version: 2026.10.28
+! Last modified: 2026-10-28
+!
+! USAGE
+!   Paste into AdGuard Home -> Filters -> Custom filtering rules,
+!   or save as a .txt file and add under DNS blocklists.
+!   "||domain^" blocks the domain and all of its subdomains.
+!
+! NOTES
+!   - Domains are compiled from community lists, forum reports and
+!     RTINGS smart TV tracking tests (July 2026). They are not official
+!     and manufacturers change endpoints regularly.
+!   - Blocking DNS does not replace disabling ACR in the TV's settings.
+!   - Some TVs use hardcoded DNS servers or DoH and bypass AdGuard Home.
+!     Redirect port 53 from the TV to AdGuard Home on your router and
+!     block port 853 (DoT) and known DoH IPs for the TV.
+!   - If an app or feature breaks, check the Query Log and add an
+!     exception, e.g. @@||example.com^
+
+! ===================================================================
+! LG (webOS): ACR, advertising, telemetry
+! ===================================================================
+! LG Ad Solutions / smart ad platform
+||lgsmartad.com^
+! LG telemetry and service discovery platform
+||lgtvsdp.com^
+! Alphonso: third-party ACR provider used by LG
+||alphonso.tv^
+! LG home screen usage reporting
+||myhomescreen.tv^
+
+! ===================================================================
+! Samsung (Tizen): ACR and advertising
+! ===================================================================
+! Samsung ACR ingestion endpoints
+||samsungacr.com^
+||samsungcloud.tv^
+! Samsung Ads
+||samsungads.com^
+! Samsung smart hub / app usage reporting
+||infolink.pavv.co.kr^
+
+! ===================================================================
+! Samba TV (ACR on Sony, Hisense, TCL and others running Google TV)
+! ===================================================================
+||samba.tv^
+! Google Analytics for Firebase (app/usage measurement on Android TV)
+||app-measurement.com^
+
+! ===================================================================
+! Roku OS (TCL, Hisense and others)
+! ===================================================================
+! Telemetry; Roku uses many subdomains of logs.roku.com
+||logs.roku.com^
+||cooper.roku.com^
+! WARNING: do NOT block roku.com or *.sr.roku.com / *.cs.roku.com.
+! This can break the TV guide, antenna TV and firmware updates.
+
+! ===================================================================
+! Vizio (Inscape ACR)
+! ===================================================================
+||inscape.tv^
